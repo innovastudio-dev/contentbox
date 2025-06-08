@@ -284,6 +284,10 @@ Where **`url`** is the path to the selected file (e.g., **`'uploads/image.png'`*
 
 This minimal integration enables basic media insertion functionality. You can extend this file picker or replace it with your own custom implementation — just make sure to call **`parent.selectAsset(url)`** with the correct file URL when a file is selected.
 
+### **Recommendation: Use Files.js Asset Manager**
+
+For a more powerful and ready-to-use solution, you can use [Files.js – Asset Manager](https://innovastudio.com/asset-manager) , which integrates seamlessly with ContentBox.js and replaces the simple **`assets.html`** file picker with a full-featured media browser.
+
 ## **🛠 Adding a Custom Topbar**
 
 ContentBox allows you to define a custom top toolbar with your own branding and buttons.
@@ -378,8 +382,6 @@ const builder = new ContentBox({
     controlPanel: true,
     iframeSrc: 'blank.html',
     
-    previewURL: 'preview.html', // Path to the preview page used to display the final content as it appears in production
-
     topSpace: true,           // Adds space at the top for your custom toolbar
     iframeCentered: true,     // Centers the page view area within the workspace
 
@@ -389,10 +391,6 @@ const builder = new ContentBox({
     deviceButtons: false      // Hide device buttons from top of page view area
 });
 ```
-
-The  **`previewURL`** option specifies the URL or path to a dedicated **preview page** , which is  included in the package under the **`public/`** folder.
-
-The preview page (**`preview.html`**) provides a clean, production-like environment for viewing the content you're editing — without the builder UI or controls. It’s ideal for final visual checks and ensures that your layout and styling appear as expected in a real-world context.
 
 ### **🔧 Binding Button Actions**
 
@@ -571,6 +569,10 @@ document.querySelector('.custom-topbar .btn-togglepanel')?.addEventListener('cli
     
     Shows or hides the side edit panel.
     
+
+The  **`preview.html`** is a dedicated **preview page** , which is  included in the package under the **`public/`** folder. It provides a clean, production-like environment for viewing the content you're editing — without the builder UI or controls. It’s ideal for final visual checks and ensures that your layout and styling appear as expected in a real-world context.
+
+In your CMS, you can also configure the preview to use an actual or production page instead of the default **`preview.html`**.
 
 With this setup, you now have a fully functional **custom topbar** integrated with ContentBox.js. You can customize the branding, layout, and behavior as needed.
 
@@ -928,6 +930,12 @@ const builder = new ContentBox({
 ```
 
 Once configured, users can generate images directly from the AI Assistant panel.
+
+### More Information
+
+Please refer to the AI Assistent documentation:
+
+[https://demo.innovastudio.com/docs/AI-Assistant.pdf](https://demo.innovastudio.com/docs/AI-Assistant.pdf) 
 
 ## **🔤 Language File Support**
 

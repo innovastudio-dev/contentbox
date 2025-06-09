@@ -31,7 +31,7 @@ Other Resources:
 - [**Section Templates**](#-section-templates)
 - [**Snippets Management**](#-snippets-management)
 - [**Other Configuration Options**](#-other-configuration-options)
-- [**Methods**](#-methods)
+- [**Methods**](%EF%B8%8F-methods)
 - [**Event Handling**](#-event-handling)
 - [**Path Configuration**](#-path-configuration)
 - [**Extending ContentBox with a Custom Panel**](#-extending-contentbox-with-a-custom-panel)
@@ -788,6 +788,8 @@ In your CMS, you can conditionally render includes based on whether certain elem
     <link href="box/box-flex.css" rel="stylesheet">
 
     <!-- [render main and section styles here] -->
+    <link data-name="contentstyle" data-class="type-poppins" href="assets/styles/type-poppins.css" rel="stylesheet">
+    <!---->
 </head>
 <body>
 

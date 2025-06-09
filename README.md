@@ -14,6 +14,28 @@ Other Resources:
 
 [More](https://innovastudio.com/resources)
 
+## Table of Contents
+- [**Getting Started**](#-getting-started)
+- [**Usage**](#-usage)
+- [**API Methods**](#-api-methods)
+- [**Example Page**](#-example-page)
+- [**Media Upload Handling**](#-media-upload-handling)
+- [**Integrating a Custom File/Asset Picker**](#-integrating-a-custom-fileasset-picker)
+- [**Adding a Custom Topbar**](#-adding-a-custom-topbar)
+- [**Adding Custom Buttons to the Left Sidebar**](#-adding-custom-buttons-to-the-left-sidebar)
+- [**Save Content to Server**](#-save-content-to-server)
+- [**Load Content from Server**](#-load-content-from-server)
+- [**Render Content in Production**](#-render-content-in-production)
+- [**AI Assistant Integration**](#-ai-assistant-integration)
+- [**Language File Support**](#-language-file-support)
+- [**Section Templates**](#-section-templates)
+- [**Snippets Management**](#-snippets-management)
+- [**Other Configuration Options**](#-other-configuration-options)
+- [**Methods**](#-methods)
+- [**Event Handling**](#-event-handling)
+- [**Path Configuration**](#-path-configuration)
+- [**Extending ContentBox with a Custom Panel**](#-extending-contentbox-with-a-custom-panel)
+
 ## **🚀 Getting Started**
 
 ### **Step 1: Installation**

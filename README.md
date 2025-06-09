@@ -208,7 +208,7 @@ In addition to image uploads, ContentBox supports several other media types via 
 - **`onMediaUpload`** – Used for galleries where both images and videos are allowed.
 - **`onFileUpload`** – For general document uploads (PDFs, Word docs, etc.).
 
-Each of these follows the same structure as **`onImageUpload`**. Here's how you can implement them:
+Each of these follows the same structure as **`onImageUpload`** , but **only one** — **`onUploadCoverImage`** — uses a **different output method** , since it is intended for setting background image of active section’s box.
 
 ```jsx
 const builder = new ContentBox({
@@ -216,7 +216,7 @@ const builder = new ContentBox({
     
     onUploadCoverImage: async (e) => {
         const data = await uploadFile(e);
-        builder.returnUrl(data.url);
+        builder.boxImage(data.url); // Sets the uploaded image as the background of the selected section's box.
     },
     
     onImageUpload: async (e) => {

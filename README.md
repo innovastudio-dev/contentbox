@@ -31,7 +31,7 @@ Other Resources:
 - [**Section Templates**](#-section-templates)
 - [**Snippets Management**](#-snippets-management)
 - [**Other Configuration Options**](#-other-configuration-options)
-- [**Methods**](%EF%B8%8F-methods)
+- [**Methods**](#%EF%B8%8F-methods)
 - [**Event Handling**](#-event-handling)
 - [**Path Configuration**](#-path-configuration)
 - [**Extending ContentBox with a Custom Panel**](#-extending-contentbox-with-a-custom-panel)

@@ -1519,8 +1519,8 @@ const builder = new ContentBox({
     ], // Replace local image paths with remote URLs
 
     // Module and plugin paths
-    modulePath: '/assets/modules/',  // module files. Use local path to avoid CORS issues (e.g., public/assets/modules/)
-    pluginPath: 'https://path.to/contentbuilder/',  // plugin files
+    modulePath: 'https://path.to/assets/modules/',
+    pluginPath: 'https://path.to/contentbuilder/',
 
     // Media path for AI-generated content (e.g., random images)
     mediaPath: 'https://path.to/assets/gallery/',

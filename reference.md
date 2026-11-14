@@ -18,30 +18,40 @@ Each button is defined by:
 ### Example: Adding Animation & Utility Buttons
 
 ```javascript
+
 builder.addButton({ 
     pos: 2,
-    title: 'Animation',
+    title: 'Animate Section',
     html: '<svg><use xlink:href="#icon-wand"></use></svg>', 
     onClick: () => {
-        builder.openAnimationPanel();
+        builder.openMotionCascade();
     }
 });
 
-builder.addButton({ 
+builder.addButton({
     pos: 3,
-    title: 'Timeline Editor',
-    html: '<svg><use xlink:href="#icon-anim-timeline"></use></svg>', 
+    title: 'Motion Timeline',
+    html: '<svg><use xlink:href="#icon-anim-timeline"></use></svg>',
     onClick: () => {
-        builder.openAnimationTimeline();
+        builder.openMotionDock();
     }
 });
 
+// Open custom modal
 builder.addButton({ 
     pos: 4,
-    title: 'AI Assistant',
-    html: '<svg><use xlink:href="#icon-sparkles"></use></svg>', 
-    onClick: (e) => {
-        builder.openAIAssistant();
+    title: 'Assets',
+    html: '<svg><use xlink:href="#icon-folder"></use></svg>', 
+    onClick: async () => {
+        builder.openModal('assets.html', {
+            ariaLabel: 'Assets',
+            // w: '88vw',
+            // maxW: '1600px',
+            // h: '88vh',
+            // onOpen: (modal, iframe) => console.log('Opened:', modal, iframe),
+            // onClose: (modal, iframe) => console.log('Closed:', modal, iframe),
+            // showCloseButton: true,
+        });
     }
 });
 
@@ -54,31 +64,23 @@ builder.addButton({
     }
 });
 
-// Open custom modal
 builder.addButton({ 
     pos: 6,
-    title: 'Assets',
-    html: '<svg><use xlink:href="#icon-folder"></use></svg>', 
+    title: 'AI Assistant',
+    html: '<svg><use xlink:href="#icon-sparkles"></use></svg>', 
     onClick: () => {
-        builder.openModal('assets.html', {
-            ariaLabel: 'Assets',
-            // w: '88vw',
-            // maxW: '1600px',
-            // h: '88vh',
-            // onOpen: (modal, iframe) => console.log('Opened:', modal, iframe),
-            // onClose: (modal, iframe) => console.log('Closed:', modal, iframe),
-            // showCloseButton: true,
-        });
+        builder.openAIAssistant();
     }
 });
 ```
 
 ### Available ContentBox Methods
 
-- `builder.openAnimationPanel()` - Opens the basic animation settings panel for quick adjustments.
-- `builder.openAnimationTimeline()` - Opens the advanced timeline-based animation editor.
-- `builder.openAIAssistant()` - Launches the AI Assistant panel for content generation.
+- `builder.openMotionCascade()` - Opens the 'Animate Section' panel.
+- `builder.openMotionDock()` - Opens the Motion editor.
+- `builder.openAIAssistant()` - Opens the AI Assistant.
 - `builder.clear()` - Clears all content from the current page.
+- `builder.modal(options)` - Builds a dialog from your own content. See 'Build Your Own Dialog'.
 
 
 ## **🔤 Language File Support**
@@ -323,6 +325,35 @@ Please refer to the *ContentBuilder.js* documentation, specifically the “Custo
 
 ## **🎨 Other Configuration Options**
 
+### **⌨️ Keyboard Access**
+
+Everything in a row, a column, an element or a piece of text can be done
+without a mouse. With the cursor in the content, `Esc` (or `Alt+F10`) moves to
+the tools for whatever you are in, and each `Esc` after that steps out one
+level: the text tools, the tools of the picture or table you are in, the
+element, the column, the row and the section, and back to your text.
+`Shift+Esc` steps back in.
+
+Each strip is a toolbar in its own right: the arrows move along it, `Home` and
+`End` jump to its ends, and `Enter` or `Space` uses a button. A panel that opens
+from a button takes the focus and hands it back when `Esc` closes it.
+
+The toolbar along the top and the panel buttons down the side are part of the
+page's normal tab order, so `Tab` reaches them and `Enter` opens one.
+
+See `docs/keyboard-access.md` for every key, with worked examples.
+
+Below 970px the tools are hidden, since laying out a page on a narrow screen is
+awkward. To keep them at every width, set **`simpleEditingBreakpoint`** to an
+empty string:
+
+```jsx
+const contentbox = new ContentBox({
+    wrapper: '.is-wrapper',
+    simpleEditingBreakpoint: ''
+});
+```
+
 ### **🌈 Color Picker**
 
 By default, ContentBox includes a color picker with a set of predefined colors. You can customize this list using the **`colors`** option:
@@ -366,19 +397,49 @@ When users paste content from external sources (like Word or another website), y
 ```jsx
 const builder = new ContentBox({
     /* options */
-    paste: 'text' // or 'html', 'html-without-styles'
+    paste: 'auto' // or 'html', 'html-without-styles', 'text'
 });
 ```
 
 **Values:**
 
-- **`'text'`** – Only plain text is pasted (default)
+- **`'auto'`** – Pasted content adopts the destination block (for example, pasting a heading into a paragraph keeps it a paragraph) while preserving text formatting such as bold, italic, links, and colors (default)
 - **`'html'`** – Full HTML content including styles
 - **`'html-without-styles'`** – HTML content without inline style attributes
+- **`'text'`** – Only plain text is pasted
 
-This helps maintain clean formatting based on your use case.
+### **🧹 Unwanted Markup from Browser Extensions**
 
-This ensures the editor starts fresh each time, ignoring any stored settings.
+Some browser extensions add their own elements and attributes to any text area they find, including the editor. That markup is not part of the content, so it is removed when the content is saved: the injected elements and attributes go, and the text they wrapped stays.
+
+This happens automatically. No configuration is needed.
+
+If your users have an extension that isn't covered, add its markup to the cleanup list:
+
+```jsx
+const builder = new ContentBox({
+    /* options */
+    extensionArtifacts: {
+        elements: ['my-extension-overlay'],     // removed entirely
+        wrappers: ['span[data-myext-id]'],      // removed, the text inside is kept
+        attributePrefixes: ['data-myext-'],     // attributes removed by prefix
+        stylePrefixes: ['--myext-']             // style properties removed by prefix
+    }
+});
+```
+
+Every list is added to the built-in ones.
+
+Extensions keep working while your users edit. If you would rather they didn't run inside the editing areas at all, you can turn them off there:
+
+```jsx
+const builder = new ContentBox({
+    /* options */
+    disableEditorExtensions: true
+});
+```
+
+Saved content is cleaned either way.
 
 ### **📋 Control the Editing on Mobile**
 
@@ -489,20 +550,20 @@ Triggers downloading the current content as an HTML file.
 builder.download();
 ```
 
-### **🎞️ Open Animation Panel**
+### **🎞️ Open 'Animate Section' panel**
 
-Opens the basic animation settings panel for quick adjustments.
+Opens the 'Animate Section' panel.
 
 ```jsx
-builder.openAnimationPanel();
+builder.openMotionCascade();
 ```
 
-### **⏱️ Open Animation Timeline**
+### **⏱️ Open Motion Editor**
 
-Opens the advanced timeline-based animation editor.
+Opens the Motion (timeline) editor.
 
 ```jsx
-builder.openAnimationTimeline();
+builder.openMotionDock();
 ```
 
 ### **🤖 Open AI Assistant Panel**
@@ -548,6 +609,84 @@ builder.redo();  // Re-applies the last undone action
 ```
 
 These are useful when integrating with custom UI elements.
+
+### **🪟 Build Your Own Dialog**
+
+`builder.modal()` builds a dialog around your content. You supply what goes
+inside; the shell, title bar, close button, accessibility attributes, padding and
+dragging are handled for you:
+
+```jsx
+const wordCount = builder.modal({
+    title: 'Word Count',
+    width: 320,
+    className: 'wordcount',   // optional hook for your own CSS
+    html: `
+        <div>
+            <div style="line-height:1">
+                <span class="wc-words" style="font-size:56px;font-weight:700;">0</span>
+                <span style="font-size:15px;margin-left:6px;">words</span>
+            </div>
+        </div>`
+});
+```
+
+It returns a handle:
+
+```jsx
+wordCount.open();     // show it
+wordCount.close();    // hide it
+wordCount.body        // the content wrapper - query your own markup from here
+wordCount.el          // the dialog element
+```
+
+So a custom button becomes:
+
+```jsx
+builder.addTextButton(buttonHtml, '.wordcount-button', () => {
+    wordCount.body.querySelector('.wc-words').textContent = countWords();
+    wordCount.open();
+});
+```
+
+**Options**
+
+| Option | Description |
+| --- | --- |
+| `html` | The content. Required. |
+| `title` | Title bar text. Omit for a bare dialog with a floating close button. |
+| `width` | `320` for pixels, or any CSS length such as `'40rem'`. |
+| `padding` | Overrides the body padding. Skipped automatically if your outermost element already sets padding inline. |
+| `closeButton` | Default `true`. |
+| `draggable` | Default `true`. Applies to the title bar. |
+| `className` | Extra class on the dialog, for your own CSS. |
+| `onOpen` / `onClose` | Callbacks, each receiving the handle. |
+
+### **🖥️ Page Preview**
+
+A fullscreen preview of the page with a width ruler, for checking the layout at
+any size without leaving the editor.
+
+```jsx
+builder.openPagePreview();
+```
+
+The frame loads your `previewURL`, and the content reaches that page through the
+existing `onPreviewOpen` hook:
+
+```jsx
+const builder = new ContentBox({
+    previewURL: 'preview.html',
+    onPreviewOpen: () => {
+        // default: saves builder.html(), mainCss() and sectionCss() to localStorage
+    },
+});
+```
+
+Nothing happens if `previewURL` is not set.
+
+> Not to be confused with `openPreview()`, which opens Live Preview, the small
+> floating window. They are separate tools and both remain available.
 
 ### **🛑 Destroying the Editor Instance**
 

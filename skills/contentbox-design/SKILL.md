@@ -36,6 +36,44 @@ follow their fallback: build objects from code and use photo URLs.
 - Save the sections to a `.html` file (for example `coffee-roastery.html`) and tell the
   user to paste its content into their ContentBox page.
 
+## Rules
+
+1. Never set `font-family` on text; the section's `type-*` class sets the fonts.
+2. Set font size, weight, line height and letter spacing with utility classes
+   (`size-*`, `font-*`, `leading-*`, `tracking-*`), never in CSS.
+3. For display text, use one size class per screen range
+   (`size-120 md-size-84 sm-size-68 xs-size-50`), never `clamp()`.
+4. Never put `pointer-events:none` on anything that holds editable text.
+5. Never put text inside `data-cb-code` or draw it as SVG, because it cannot be edited.
+6. Never put words in a script, because they cannot be edited. A script may only
+   animate a number taken from the page text.
+7. Never put a `<video>` inside `data-cb-code`. In the overlay, use the
+   `video-background` plugin. In a column, use `<video>` with a `<source>` child.
+8. Set the page background on `.is-overlay`, nowhere else.
+9. Give text on a photo or video a backing that works on any image (panel, soft
+   field behind the text), never relying on this image's brightness.
+10. When you set a text colour on a parent (a card, a panel), add
+    `p, li { color: inherit; }` under the section's own class in its style.
+    Otherwise the page's own paragraph colour overrides it.
+
+### For animated sections
+
+11. Build a complex animation inside the overlay (`.is-overlay-content`). Put
+    editable content in several small `.is-container`s inside the overlay, each
+    covering only its own area (nav, headline, caption, card). Never one full-width
+    container holding the whole design: its row tools fall off-screen and everything
+    is hard to select.
+12. Use a container only for main content the user reshapes (headline, text,
+    buttons). Put small animation parts (counter, timecode, scroll hint, label)
+    straight in `.is-overlay-content` with no container, so they cannot be broken or
+    deleted. Style them with the design's own CSS.
+13. Make every effect still work after the user swaps the photo, video and copy.
+    Never tie an effect to one spot in the image.
+14. Make the first frame a finished picture. Never start with a cover, fog or blinds
+    hiding the image.
+15. Respect `prefers-reduced-motion`. Give anything that moves by itself a pause
+    button.
+
 ## Preview
 
 The sections only look right with ContentBox's styles loaded. To show the design,

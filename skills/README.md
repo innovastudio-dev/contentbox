@@ -10,18 +10,18 @@ browser games.
 
 ## Install
 
-**Claude app (claude.ai):** download [contentbox-design.zip](contentbox-design.zip), then
-go to Settings > Capabilities > Skills and upload it.
+**Claude Code:** paste this prompt:
 
-**Claude Code:** copy the [contentbox-design](contentbox-design) folder into
-`~/.claude/skills/` (for all projects) or into your project's `.claude/skills/`.
+```
+Install the ContentBox design skill: read https://raw.githubusercontent.com/innovastudio-dev/contentbox/HEAD/skills/INSTALL.md and follow every step.
+```
 
-**ChatGPT:** open Skills, choose Create, then Upload from your computer, and select the zip.
+**Claude app (claude.ai):** download [contentbox-design.zip](contentbox-design.zip), then go to Settings > Capabilities > Skills and upload it.
+
+**ChatGPT:** download the same zip, open Skills, choose Create, then Upload from your computer, and select the zip.
 
 ## Use
 
-Ask for a ContentBox page or section. Claude picks up the skill on its own, or you can
-name it: *"Use the contentbox-design skill to create a header for a photography studio."*
-
-Download the generated preview file and open it in your browser to see the design with
-its photos, then paste the sections into your ContentBox page.
+1. Ask Claude for a ContentBox page or section, for example *"Create a ContentBox landing page for a coffee roastery"*.
+2. Claude gives you the sections and a preview file.
+3. Paste the sections into your ContentBox page, or open the preview file in your browser (in the Claude app, download it first).

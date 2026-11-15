@@ -74,6 +74,28 @@ follow their fallback: build objects from code and use photo URLs.
 15. Respect `prefers-reduced-motion`. Give anything that moves by itself a pause
     button.
 
+### For animated series
+
+A series is several photos shown together in a formation that changes on scroll and
+moves by itself, eg. in a clear formation in 3D space (depth from size and overlap).
+
+16. Show only the photos or videos. No drawn props (stands, wires, books, boxes,
+    furniture).
+17. On scroll, move the items from one clean geometric formation to the next, for
+    example a loose ring, then a diagonal cascade, then one item brought forward.
+18. Show each item as itself in every state, with its own place, size, angle and
+    depth. Never pack them close together into one long strip or sheet.
+19. Make the items move by themselves while nobody scrolls, in the start and end
+    states (a ring turns, a stair spins). A formation that only moves on scroll looks
+    dead.
+20. On hover over an item, hold the motion. The pause button stops it, never the
+    scroll.
+21. For video series: Play one video at a time, with the others holding a still
+    frame. Two or more playing drops the page to 30fps.
+22. When a caption changes with the motion, freeze it while the pointer or text
+    cursor is in it, so it stays editable.
+23. Never animate `filter: blur` on moving items, because it drops the frame rate.
+
 ## Preview
 
 The sections only look right with ContentBox's styles loaded. To show the design,

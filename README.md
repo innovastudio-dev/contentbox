@@ -4,6 +4,19 @@ ContentBox.js is a Javascript library for designing and building complete web pa
 
 Website: [https://innovastudio.com/contentbox](https://innovastudio.com/contentbox)
 
+## Step-by-Step Guides
+
+Short guides that take you from an empty project to a working editor, with saving, uploads and a page that shows the content to visitors. Pick your setup:
+
+- [Plain HTML](https://innovastudio.com/using-contentbox-in-plain-html): no build step, no backend
+- [PHP](https://innovastudio.com/using-contentbox-in-a-php-project): no framework
+- [React](https://innovastudio.com/using-contentbox-in-a-react-project): Vite
+- [Next.js](https://innovastudio.com/using-contentbox-in-a-nextjs-project): App Router
+- [Laravel](https://innovastudio.com/using-contentbox-in-a-laravel-project): Blade and Vite
+- [SvelteKit](https://innovastudio.com/using-contentbox-in-a-sveltekit-project): Svelte 5
+
+Also: [Adding a custom top bar](https://innovastudio.com/adding-a-custom-topbar-for-contentbox)
+
 ## Installation
 
 ### Via NPM
@@ -993,7 +1006,7 @@ The `contentbox-design` skill lets Claude (or ChatGPT) design page sections for 
 Install the ContentBox design skill: read https://raw.githubusercontent.com/innovastudio-dev/contentbox/HEAD/skills/INSTALL.md and follow every step.
 ```
 
-**Claude app (claude.ai):** download [contentbox-design.zip](skills/contentbox-design.zip), then go to Settings > Capabilities > Skills and upload it.
+**Claude app (claude.ai):** download [contentbox-design.zip](https://github.com/innovastudio-dev/contentbox/raw/HEAD/skills/contentbox-design.zip), then go to Settings > Capabilities > Skills and upload it.
 
 **ChatGPT:** download the same zip, open Skills, choose Create, then Upload from your computer, and select the zip.
 
